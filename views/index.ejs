@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Weather</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=yes"
+    />
+
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/office/16/000000/sunset--v2.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body style="background-color: black;">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Main container -->
+<div class = "container">
+
+  <!-- input field-->
+  <fieldset>
+    <!-- fetching city name-->
+    <form action="/" method = "post">
+      <input name="city" type="text" class="ghost-input" placeholder="Enter a City" required>
+      <input type="submit"class="ghost-button" value="Get Weather">
+    </form>
+
+    <!--now that we've fetched the data, let's display it-->
+    <%if( weather !== null) { %>
+    <div class="grid" style="text-align: center; width: max-content;">
+      <p style="background: rgba(0,0,0,.0001);"><%= place %>
+      </p>
+    </div>
+     <!--additional data that we also want-->
+    <div class="card-deck" style="text-align: center;">
+      <div class="card card-accent-dark mb-3"style="background: rgba(0,0,0,.01);">
+        <div class="card-body text-dark">
+         <h5 class = "card-title">Temperature</h5>
+        <p class="card-text" >
+          <img src="<%= icon%>" alt="Weather-icon">
+          <%= fahrenheit %>°F
+        </p>
+        <div class="card-deck" style="flex-direction: row;">
+          <div class="card-body text-dark" style="flex-direction: column;">
+            <h5 class="card-title">Low Today </h5>
+            <p class="card-text" >
+              <%= lowTemp %>°F
+            </p>
+            <h5 class="card-title">Feels Like </h5>
+            <p class="card-text" >
+              <%= feelsLike%>°F
+            </p>
+          </div>
+          <div class="card-body text-dark" style="flex-direction: column;">
+            <h5 class="card-title">High Today </h5>
+            <p class="card-text">
+              <%= highTemp %>°F
+            </p>
+            <h5 class="card-title">Humidity </h5>
+            <p class="card-text" >
+              <%= humidity %>%
+            </p>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div style="width: 30%;">
+        <div class="card card-accent-dark mb-3" style="background: rgba(0,0,0,.01);">
+        <div class="card-body text-dark">
+            <h6 class="card-title">Cloud coverage </h5>
+            <p class="card-text">
+              <span class="iconify" data-icon="akar-icons:cloud"></span>
+              <%= description %>
+            </p>
+            <h6 class="card-title">Wind </h5>
+              <p class="card-text">
+                <span class="iconify" data-icon="bi:wind"></span> 
+                <%= windSpeed %> mph <%= windDir %>
+              </p>
+        </div>
+      </div>
+      <div class="card card-accent-dark mb-3" style="background: rgba(0,0,0,.01);">
+        <div class="card-body text-dark">
+          <h6 class = "card-title">Sunrise</h5>
+            <p class="card-text">
+              <span class="iconify" data-icon="bi:sunrise"></span>
+              <%= sunrise %> am   EST
+            </p>
+          <h6 class="card-title">Sunset </h5>  
+            <p class="card-text">
+              <span class="iconify" data-icon="bi:sunset"></span>
+              <%= sunset %> pm   EST
+            </p>
+        </div>
+      </div>
+    </div style="font-size: small;">
+        </div>
+        <div class="card-deck">
+          <div class="card card-dark mb-3"style="background: rgba(0,0,0,.001);">
+            <div class="card-header">Additional Information</div>
+            <div class="card-body text-dark">
+              <h6 class="card-title">Pressure </h5>
+              <p class="card-text">
+                <%= pressure %> Pa
+              </p>
+              <h6 class="card-title">Visibility </h5>
+            <p class="card-text">
+              <span class="iconify" data-icon="ic:baseline-visibility"></span>
+              <%= visibility %> miles
+            </p>
+            </div>
+          </div>
+        </div>
+        <h6 style="color: rgb(19, 24, 24); opacity: 25% ;"><%= timezone %>
+        </h6>
+      <% } %>
+
+        <% if(error !== null){ %>
+        <p>
+          <%= error %>
+        </p>
+        <% } %>
+    </div>
+   </fieldset>
+</div>
+</body>
+</html>
